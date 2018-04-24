@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fx.mapper.UserInfoMapper">
+
+
+	
+	<!-- 查询操作(登录验证） -->
+	<select id="selectUserLoginValidate" parameterType="java.util.Map" resultType="com.fx.pojo.UserInfo" >
+		select * from users_information  where userId=#{userId} and password=#{password}
+	</select>
+	
+	<!-- 查询操作(返回基本信息） -->
+		<select id="selectUserInfo" parameterType="String" resultType="com.fx.pojo.UserInfo">
+		select * from users_information  where userId=#{userId}
+	</select>
+	
+	
+	<!-- 插入操作 -->
+	<insert id="insertUserInfo" parameterType="com.fx.pojo.UserInfo">
+		insert into users_information (userId,userName,password,user_dept1,user_dept2,user_kind,email,email_flag,phone,others) 
+		values (
+		#{userId,jdbcType=VARCHAR},
+		#{userName,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},
+		#{user_dept1,jdbcType=VARCHAR},
+		#{user_dept2,jdbcType=VARCHAR},
+		#{user_kind,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{email_flag,jdbcType=VARCHAR},
+		#{phone,jdbcType=VARCHAR},
+		#{others,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<!-- 更新操作 -->
+	<update id="updateUserInfo" parameterType="com.fx.pojo.UserInfo">
+		update Test 
+		set Testname = #{Testname},sex = #{sex},birthday = #{birthday},address = #{address}
+		where id = #{id}
+	</update>
+	
+	<!-- 删除操作 -->
+	<delete id="deleteTestById" parameterType="Integer">
+		delete from Test 
+		where id = #{id}
+	</delete>
+
+
+</mapper>

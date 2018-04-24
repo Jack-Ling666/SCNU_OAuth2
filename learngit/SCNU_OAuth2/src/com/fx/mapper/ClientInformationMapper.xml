@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fx.mapper.ClientInformationMapper">
+
+	<!-- 查询操作 -->
+	<select id="selectClientExist"  parameterType="map" resultType="com.fx.pojo.ClientInformation">
+		select * from CLIENT_INFORMATION  where client_id=#{client_id} and redirect_url =#{redirect_url}
+	</select>
+	
+		<select id="selectClientValidate" parameterType="String" resultType="com.fx.pojo.ClientInformation">
+		select * from  CLIENT_INFORMATION where client_id=#{client_id} 
+		</select>
+	
+	
+	<!-- 插入操作 -->
+	<insert id="insertClient" parameterType="com.fx.pojo.ClientInformation">
+		insert into CLIENT_INFORMATION (
+		client_id,
+		client_secret,
+		client_name,
+		redirect_url,
+		applicant_name,
+		id_card,
+		phone,
+		client_description,
+		access_token_validity,
+		refresh_token_validity,
+		email,
+		email_flag,
+		ip,
+		others
+		) 
+		values (
+		#{client_id,jdbcType=VARCHAR},
+		#{client_secret,jdbcType=VARCHAR},
+		#{client_name,jdbcType=VARCHAR},
+		#{redirect_url,jdbcType=VARCHAR},
+		#{applicant_name,jdbcType=VARCHAR},
+		#{id_card,jdbcType=VARCHAR},
+		#{phone,jdbcType=VARCHAR},
+		#{client_description,jdbcType=VARCHAR},
+		#{access_token_validity,jdbcType=VARCHAR},
+		#{refresh_token_validity,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{email_flag,jdbcType=VARCHAR},
+		#{ip,jdbcType=VARCHAR},
+		#{others,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	
+	<!-- 更新操作 -->
+	<update id="updateClient" parameterType="com.fx.pojo.ClientInformation">
+		update CLIENT_INFORMATION 
+		<set>
+		<if test="email_flag!=null ">email_flag = #{email_flag},</if>
+		</set>
+		where
+		 client_id = #{client_id}
+	</update>
+	
+	
+	
+	<!-- 删除操作 -->
+	<delete id="deleteTestById" parameterType="Integer">
+		delete from Test 
+		where id = #{id}
+	</delete>
+
+
+</mapper>
